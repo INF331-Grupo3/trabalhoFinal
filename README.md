@@ -4,12 +4,12 @@
 # Projeto `<Título>`
 
 # Equipe 3
-* Nome: Jhovani César Merisse RG: 44691020-X
-* Nome: Jonathan Xavier RG: MG11370577
-* Nome: Marcelo de Souza Tamashiro RG: 417926352
-* Nome: Rebeca Paulino de Morais RG: 418804473
-* Nome: Renan Alves da Silva RG: 54.255.598-0
-* Nome: Rodrigo Yokoo Siqueira Bueno RG: 25.364.817-8
+* Nome: Jhovani César Merisse 
+* Nome: Jonathan Xavier 
+* Nome: Marcelo de Souza Tamashiro 
+* Nome: Rebeca Paulino de Morais 
+* Nome: Renan Alves da Silva 
+* Nome: Rodrigo Yokoo Siqueira Bueno 
 
 # Nível 1
 
