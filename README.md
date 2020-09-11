@@ -55,6 +55,139 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 > * Resultado Leilão
 > * Efetua Pagamento
 
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface `Solicita Leilão`
+
+> Interface responsável por publicar a solicitação de abertura de um novo leilão
+
+**Tópico**: `leilao/solicitacao/<produto>`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface1.png)
+
+~~~json
+{
+  "id": 293012,
+  "data": "2020-09-11",  
+  "quantidade": 2,
+  "Produto": {
+      "id": "20",
+      "nome": "Celular"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do pedido`
+`data` | `data que o pedido foi efetuado`
+`quantidade` | `quantidade de unidades do produto`
+`Produto` | `quantidade de unidades do produto`
+
+Produto
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do produto`
+`nome` | `nome do produto`
+`descricao` | `descrição do produto`
+
+### Interface `Resultado Leilão`
+
+> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+
+**Tópico**: `leilão/+/finalizado`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface2.png)
+
+~~~json
+{
+  "id": 1,
+  "pedidoId": "293012",  
+  "dataInicial": "2020-09-11 10:00:00",
+  "dataFinal": "2020-09-11 11:00:00",
+  "Lance": {
+      "id": "200",
+      "fornecedorId": 1,
+      "valor": 200.00,
+      "dataLance": "2020-09-11 10:20:14"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Leilão
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do leilão`
+`pedidoId` | `id do leilão`
+`dataInicial` | `data de início do leilão`
+`dataFinal` | `data final do leilão`
+`Lance` | `detalhes do lance vencedor`
+
+Lance
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do lance`
+`fornecedorId` | `id do fornecedor`
+`valor` | `valor do lance`
+`dataLance` | `data e hora em que o lance foi efetuado`
+
+### Interface `Efetua Pagamento`
+
+> Interface responsável por enviar os dados de pagamento de acordo com o lance vencedor
+
+**Tópico**: `pagamento/<identificador>/solicita`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface3.png)
+
+~~~json
+{
+  "pedidoId": 2032,  
+  "valor": 200.00,
+  "formaPagamento" : "Boleto Bancário",
+  "Cliente": {
+      "id": "20",
+      "nome": "XPTO",
+      "endereco": "Rua xyz, Cidade ABC, 00000-000"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`pedidoId` | `Identificador do pedido`
+`valor` | `valor total para pagamento`
+`forma de pagamento` | `definição da forma de pagamento`
+`Cliente` | `Informações do cliente`
+
+Cliente
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do cliente`
+`nome` | `nome do cliende`
+`endereco do cliente` | `endereço do cliente`
+
 ## Componente Fornecedor
 
 > Esse componente tem como papel monitorar os leilões e efetuar lances para os leilões dos produtos solicitados pelos clientes
@@ -63,6 +196,139 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 > * Monitora Leilão
 > * Efetua Lance
 
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface `Monitora Leilão`
+
+> Interface responsável por publicar notificações quando o leilão é iniciado
+
+**Tópico**: `leilao/+/inicio`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](colocar uma imagem)
+
+~~~json
+{
+  "id": 293012,
+  "data": "2020-09-11",  
+  "quantidade": 2,
+  "Produto": {
+      "id": "20",
+      "nome": "Celular"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do pedido`
+`data` | `data que o pedido foi efetuado`
+`quantidade` | `quantidade de unidades do produto`
+`Produto` | `quantidade de unidades do produto`
+
+Produto
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do produto`
+`nome` | `nome do produto`
+`descricao` | `descrição do produto`
+
+### Interface `Resultado Leilão`
+
+> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+
+**Tópico**: `leilão/+/finalizado`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface2.png)
+
+~~~json
+{
+  "id": 1,
+  "pedidoId": "293012",  
+  "dataInicial": "2020-09-11 10:00:00",
+  "dataFinal": "2020-09-11 11:00:00",
+  "Lance": {
+      "id": "200",
+      "fornecedorId": 1,
+      "valor": 200.00,
+      "dataLance": "2020-09-11 10:20:14"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Leilão
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do leilão`
+`pedidoId` | `id do leilão`
+`dataInicial` | `data de início do leilão`
+`dataFinal` | `data final do leilão`
+`Lance` | `detalhes do lance vencedor`
+
+Lance
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do lance`
+`fornecedorId` | `id do fornecedor`
+`valor` | `valor do lance`
+`dataLance` | `data e hora em que o lance foi efetuado`
+
+### Interface `Efetua Pagamento`
+
+> Interface responsável por enviar os dados de pagamento de acordo com o lance vencedor
+
+**Tópico**: `pagamento/<identificador>/solicita`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface3.png)
+
+~~~json
+{
+  "pedidoId": 2032,  
+  "valor": 200.00,
+  "formaPagamento" : "Boleto Bancário",
+  "Cliente": {
+      "id": "20",
+      "nome": "XPTO",
+      "endereco": "Rua xyz, Cidade ABC, 00000-000"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`pedidoId` | `Identificador do pedido`
+`valor` | `valor total para pagamento`
+`forma de pagamento` | `definição da forma de pagamento`
+`Cliente` | `Informações do cliente`
+
+Cliente
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do cliente`
+`nome` | `nome do cliende`
+`endereco do cliente` | `endereço do cliente`
+
 ## Componente Pagamento
 
 > Esse componente tem como papel solicitar o pagamento do produto e publicar no barramento o status do pagamento
@@ -70,31 +336,6 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 ![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Pagamento.JPG)
 > * Solicita Pagamento
 > * Status Pagamento
-
-## Componente Leilão
-
-> Esse componente tem como papel receber um pedido de leilão, receber os lances do leilão e controlar o leilão publicando no barramento qual o menor lance.
-
-![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Leilao.JPG)
-> * Pedido Leilão
-> * Controle Leilão
-> * Recebe Lance
-
-## Componente Historico de Lance
-
-> Esse componente tem como papel registrar as informações de cada leilão, valor do lance, fornecedor, data e hora do lance;
-
-![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/HistoricoLance.JPG)
-> * Recebe Lance
-
-## Componente Fechamento do Pedido
-
-> Esse componente tem como papel receber o pagamento do cliente e fechar o pedido.
-
-![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Fechamento_Pedido.JPG)
-> * Recebe Pagamento
-
-
 
 As interfaces listadas são detalhadas a seguir:
 
@@ -229,8 +470,427 @@ Atributo | Descrição
 `nome` | `nome do cliende`
 `endereco do cliente` | `endereço do cliente`
 
+## Componente Leilão
 
+> Esse componente tem como papel receber um pedido de leilão, receber os lances do leilão e controlar o leilão publicando no barramento qual o menor lance.
 
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Leilao.JPG)
+> * Pedido Leilão
+> * Controle Leilão
+> * Recebe Lance
+
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface `Solicita Leilão`
+
+> Interface responsável por publicar a solicitação de abertura de um novo leilão
+
+**Tópico**: `leilao/solicitacao/<produto>`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface1.png)
+
+~~~json
+{
+  "id": 293012,
+  "data": "2020-09-11",  
+  "quantidade": 2,
+  "Produto": {
+      "id": "20",
+      "nome": "Celular"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do pedido`
+`data` | `data que o pedido foi efetuado`
+`quantidade` | `quantidade de unidades do produto`
+`Produto` | `quantidade de unidades do produto`
+
+Produto
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do produto`
+`nome` | `nome do produto`
+`descricao` | `descrição do produto`
+
+### Interface `Resultado Leilão`
+
+> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+
+**Tópico**: `leilão/+/finalizado`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface2.png)
+
+~~~json
+{
+  "id": 1,
+  "pedidoId": "293012",  
+  "dataInicial": "2020-09-11 10:00:00",
+  "dataFinal": "2020-09-11 11:00:00",
+  "Lance": {
+      "id": "200",
+      "fornecedorId": 1,
+      "valor": 200.00,
+      "dataLance": "2020-09-11 10:20:14"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Leilão
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do leilão`
+`pedidoId` | `id do leilão`
+`dataInicial` | `data de início do leilão`
+`dataFinal` | `data final do leilão`
+`Lance` | `detalhes do lance vencedor`
+
+Lance
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do lance`
+`fornecedorId` | `id do fornecedor`
+`valor` | `valor do lance`
+`dataLance` | `data e hora em que o lance foi efetuado`
+
+### Interface `Efetua Pagamento`
+
+> Interface responsável por enviar os dados de pagamento de acordo com o lance vencedor
+
+**Tópico**: `pagamento/<identificador>/solicita`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface3.png)
+
+~~~json
+{
+  "pedidoId": 2032,  
+  "valor": 200.00,
+  "formaPagamento" : "Boleto Bancário",
+  "Cliente": {
+      "id": "20",
+      "nome": "XPTO",
+      "endereco": "Rua xyz, Cidade ABC, 00000-000"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`pedidoId` | `Identificador do pedido`
+`valor` | `valor total para pagamento`
+`forma de pagamento` | `definição da forma de pagamento`
+`Cliente` | `Informações do cliente`
+
+Cliente
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do cliente`
+`nome` | `nome do cliende`
+`endereco do cliente` | `endereço do cliente`
+
+## Componente Historico de Lance
+
+> Esse componente tem como papel registrar as informações de cada leilão, valor do lance, fornecedor, data e hora do lance;
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/HistoricoLance.JPG)
+> * Recebe Lance
+
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface `Solicita Leilão`
+
+> Interface responsável por publicar a solicitação de abertura de um novo leilão
+
+**Tópico**: `leilao/solicitacao/<produto>`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface1.png)
+
+~~~json
+{
+  "id": 293012,
+  "data": "2020-09-11",  
+  "quantidade": 2,
+  "Produto": {
+      "id": "20",
+      "nome": "Celular"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do pedido`
+`data` | `data que o pedido foi efetuado`
+`quantidade` | `quantidade de unidades do produto`
+`Produto` | `quantidade de unidades do produto`
+
+Produto
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do produto`
+`nome` | `nome do produto`
+`descricao` | `descrição do produto`
+
+### Interface `Resultado Leilão`
+
+> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+
+**Tópico**: `leilão/+/finalizado`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface2.png)
+
+~~~json
+{
+  "id": 1,
+  "pedidoId": "293012",  
+  "dataInicial": "2020-09-11 10:00:00",
+  "dataFinal": "2020-09-11 11:00:00",
+  "Lance": {
+      "id": "200",
+      "fornecedorId": 1,
+      "valor": 200.00,
+      "dataLance": "2020-09-11 10:20:14"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Leilão
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do leilão`
+`pedidoId` | `id do leilão`
+`dataInicial` | `data de início do leilão`
+`dataFinal` | `data final do leilão`
+`Lance` | `detalhes do lance vencedor`
+
+Lance
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do lance`
+`fornecedorId` | `id do fornecedor`
+`valor` | `valor do lance`
+`dataLance` | `data e hora em que o lance foi efetuado`
+
+### Interface `Efetua Pagamento`
+
+> Interface responsável por enviar os dados de pagamento de acordo com o lance vencedor
+
+**Tópico**: `pagamento/<identificador>/solicita`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface3.png)
+
+~~~json
+{
+  "pedidoId": 2032,  
+  "valor": 200.00,
+  "formaPagamento" : "Boleto Bancário",
+  "Cliente": {
+      "id": "20",
+      "nome": "XPTO",
+      "endereco": "Rua xyz, Cidade ABC, 00000-000"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`pedidoId` | `Identificador do pedido`
+`valor` | `valor total para pagamento`
+`forma de pagamento` | `definição da forma de pagamento`
+`Cliente` | `Informações do cliente`
+
+Cliente
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do cliente`
+`nome` | `nome do cliende`
+`endereco do cliente` | `endereço do cliente`
+
+## Componente Fechamento do Pedido
+
+> Esse componente tem como papel receber o pagamento do cliente e fechar o pedido.
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Fechamento_Pedido.JPG)
+> * Recebe Pagamento
+
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface `Solicita Leilão`
+
+> Interface responsável por publicar a solicitação de abertura de um novo leilão
+
+**Tópico**: `leilao/solicitacao/<produto>`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface1.png)
+
+~~~json
+{
+  "id": 293012,
+  "data": "2020-09-11",  
+  "quantidade": 2,
+  "Produto": {
+      "id": "20",
+      "nome": "Celular"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do pedido`
+`data` | `data que o pedido foi efetuado`
+`quantidade` | `quantidade de unidades do produto`
+`Produto` | `quantidade de unidades do produto`
+
+Produto
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do produto`
+`nome` | `nome do produto`
+`descricao` | `descrição do produto`
+
+### Interface `Resultado Leilão`
+
+> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+
+**Tópico**: `leilão/+/finalizado`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface2.png)
+
+~~~json
+{
+  "id": 1,
+  "pedidoId": "293012",  
+  "dataInicial": "2020-09-11 10:00:00",
+  "dataFinal": "2020-09-11 11:00:00",
+  "Lance": {
+      "id": "200",
+      "fornecedorId": 1,
+      "valor": 200.00,
+      "dataLance": "2020-09-11 10:20:14"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Leilão
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do leilão`
+`pedidoId` | `id do leilão`
+`dataInicial` | `data de início do leilão`
+`dataFinal` | `data final do leilão`
+`Lance` | `detalhes do lance vencedor`
+
+Lance
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do lance`
+`fornecedorId` | `id do fornecedor`
+`valor` | `valor do lance`
+`dataLance` | `data e hora em que o lance foi efetuado`
+
+### Interface `Efetua Pagamento`
+
+> Interface responsável por enviar os dados de pagamento de acordo com o lance vencedor
+
+**Tópico**: `pagamento/<identificador>/solicita`
+
+Classes que representam objetos JSON associados às mensagens da interface:
+
+![Diagrama Classes REST](images/nivel1_component1_interface3.png)
+
+~~~json
+{
+  "pedidoId": 2032,  
+  "valor": 200.00,
+  "formaPagamento" : "Boleto Bancário",
+  "Cliente": {
+      "id": "20",
+      "nome": "XPTO",
+      "endereco": "Rua xyz, Cidade ABC, 00000-000"
+  }
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+Pedido
+
+Atributo | Descrição
+-------| --------
+`pedidoId` | `Identificador do pedido`
+`valor` | `valor total para pagamento`
+`forma de pagamento` | `definição da forma de pagamento`
+`Cliente` | `Informações do cliente`
+
+Cliente
+
+Atributo | Descrição
+-------| --------
+`id` | `identificador do cliente`
+`nome` | `nome do cliende`
+`endereco do cliente` | `endereço do cliente`
 
 # Nível 2
 
