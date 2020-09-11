@@ -55,6 +55,47 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 > * Resultado Leilão
 > * Efetua Pagamento
 
+## Componente Fornecedor
+
+> Esse componente tem como papel monitorar os leilões e efetuar lances para os leilões dos produtos solicitados pelos clientes
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Fornecedor.JPG)
+> * Monitora Leilão
+> * Efetua Lance
+
+## Componente Pagamento
+
+> Esse componente tem como papel solicitar o pagamento do produto e publicar no barramento o status do pagamento
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Pagamento.JPG)
+> * Solicita Pagamento
+> * Status Pagamento
+
+## Componente Leilão
+
+> Esse componente tem como papel receber um pedido de leilão, receber os lances do leilão e controlar o leilão publicando no barramento qual o menor lance.
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Leilao.JPG)
+> * Pedido Leilão
+> * Controle Leilão
+> * Recebe Lance
+
+## Componente Historico de Lance
+
+> Esse componente tem como papel registrar as informações de cada leilão, valor do lance, fornecedor, data e hora do lance;
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/HistoricoLance.JPG)
+> * Recebe Lance
+
+## Componente Fechamento do Pedido
+
+> Esse componente tem como papel receber o pagamento do cliente e fechar o pedido.
+
+![Componente](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/Fechamento_Pedido.JPG)
+> * Recebe Pagamento
+
+
+
 As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
