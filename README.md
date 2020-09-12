@@ -358,6 +358,7 @@ Classes que representam objetos JSON associados às mensagens da interface:
   "pedidoId": 2032,  
   "valor": 200.00,
   "formaPagamento" : "Boleto Bancário",
+  "statusPagamento" : true,
   "Cliente": {
       "id": "20",
       "nome": "XPTO",
@@ -616,6 +617,7 @@ Classes que representam objetos JSON associados às mensagens da interface:
   "pedidoId": 2032,  
   "valor": 200.00,
   "formaPagamento" : "Boleto Bancário",
+  "statusPagamento" : true,
   "Cliente": {
       "id": "20",
       "nome": "XPTO",
@@ -654,7 +656,7 @@ Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação 
 
 Apresente um diagrama conforme o modelo a seguir:
 
-> ![Modelo de diagrama no nível 2](images/nivel2_mvc_cliente.png)
+> ![Modelo de diagrama no nível 2](images/diagrama-subcomponentes.png)
 
 ### Detalhamento da interação de componentes
 
