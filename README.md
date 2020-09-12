@@ -656,7 +656,7 @@ Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação 
 
 Apresente um diagrama conforme o modelo a seguir:
 
-> ![Modelo de diagrama no nível 2](images/diagrama-subcomponentes.png)
+> ![Modelo de diagrama no nível 2](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/nivel2_mvc_cliente.png)
 
 ### Detalhamento da interação de componentes
 
