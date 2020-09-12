@@ -1,7 +1,7 @@
 
 
 
-# Projeto `<Título>`
+# Projeto `<Especificando Componentes>`
 
 # Equipe 3
 * Nome: Jhovani César Merisse 
@@ -13,11 +13,8 @@
 
 # Nível 1
 
-Apresente aqui o detalhamento do Nível 1 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
 
 ## Diagrama Geral do Nível 1
-
-Apresente um diagrama conforme o modelo a seguir:
 
 > ![Modelo de diagrama no nível 1](images/nivel_1.jpg)
 
@@ -208,44 +205,49 @@ As interfaces listadas são detalhadas a seguir:
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
-![Diagrama Classes REST](colocar uma imagem)
+![Diagrama Classes REST](images/nivel1_component1_interface2.png)
 
 ~~~json
 {
-  "id": 293012,
-  "data": "2020-09-11",  
-  "quantidade": 2,
-  "Produto": {
-      "id": "20",
-      "nome": "Celular"
+  "id": 1,
+  "pedidoId": "293012",  
+  "dataInicial": "2020-09-11 10:00:00",
+  "dataFinal": "2020-09-11 11:00:00",
+  "Lance": {
+      "id": "200",
+      "fornecedorId": 1,
+      "valor": 200.00,
+      "dataLance": "2020-09-11 10:20:14"
   }
 }
 ~~~
 
 Detalhamento da mensagem JSON:
 
-Pedido
+Leilão
 
 Atributo | Descrição
 -------| --------
-`id` | `identificador do pedido`
-`data` | `data que o pedido foi efetuado`
-`quantidade` | `quantidade de unidades do produto`
-`Produto` | `quantidade de unidades do produto`
+`id` | `identificador do leilão`
+`pedidoId` | `id do leilão`
+`dataInicial` | `data de início do leilão`
+`dataFinal` | `data final do leilão`
+`Lance` | `detalhes do lance vencedor`
 
-Produto
+Lance
 
 Atributo | Descrição
 -------| --------
-`id` | `identificador do produto`
-`nome` | `nome do produto`
-`descricao` | `descrição do produto`
+`id` | `identificador do lance`
+`fornecedorId` | `id do fornecedor`
+`valor` | `valor do lance`
+`dataLance` | `data e hora em que o lance foi efetuado`
 
 ### Interface `Efetua Lance`
 
-> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+> Interface responsável por publicar um lance efetuado pelo fornecedor
 
-**Tópico**: `leilão/+/finalizado`
+**Tópico**: `leilao/<identificador>/lance`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -302,9 +304,9 @@ As interfaces listadas são detalhadas a seguir:
 
 ### Interface `Solicita Pagamento`
 
-> Interface responsável por publicar a solicitação de abertura de um novo leilão
+> Interface responsável por receber a solicitação de pagamento e retorna se o pagamento foi ou não efetuado.
 
-**Tópico**: `leilao/solicitacao/<produto>`
+**Tópico**: `pagamento/+/solicita`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -343,9 +345,8 @@ Atributo | Descrição
 
 ### Interface `Status Pagamento`
 
-> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
-
-**Tópico**: `leilão/+/finalizado`
+> Interface responsável por verificar e efetuar o pagamento junto as instituições financeiras
+**Tópico**: `pagamento/<identificador>/status/<status>`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -403,9 +404,9 @@ As interfaces listadas são detalhadas a seguir:
 
 ### Interface `Pedido Leilão`
 
-> Interface responsável por publicar a solicitação de abertura de um novo leilão
+> Interface responsável por receber solitação de leilão e define o horario de inicio e fim
 
-**Tópico**: `leilao/solicitacao/<produto>`
+**Tópico**: `leilao/solicitacao/+`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -444,9 +445,9 @@ Atributo | Descrição
 
 ### Interface `Controle Leilão`
 
-> Interface responsável por verificar o fim do leilão e informar ao cliente qual foi o lance vencedor
+> Interface responsável por efetuar a abertura do leilão
 
-**Tópico**: `leilão/+/finalizado`
+**Tópico**: `leilao/<identificador>/inicio`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -490,9 +491,9 @@ Atributo | Descrição
 
 ### Interface `Recebe Lance`
 
-> Interface responsável por enviar os dados de pagamento de acordo com o lance vencedor
+> Interface responsável por receber o lance de um produto e atualizar com o menor valor.
 
-**Tópico**: `pagamento/<identificador>/solicita`
+**Tópico**: `leilao/+/lance`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -543,9 +544,9 @@ As interfaces listadas são detalhadas a seguir:
 
 ### Interface `Recebe Lance`
 
-> Interface responsável por publicar a solicitação de abertura de um novo leilão
+> Interface responsável por registrar as informações do lance.
 
-**Tópico**: `leilao/solicitacao/<produto>`
+**Tópico**: `leilao/+/lance`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
@@ -596,9 +597,9 @@ As interfaces listadas são detalhadas a seguir:
 
 ### Interface `Recebe Pagamento`
 
-> Interface responsável por publicar a solicitação de abertura de um novo leilão
+> Interface responsável por fazer o fechamento do pedido
 
-**Tópico**: `leilao/solicitacao/<produto>`
+**Tópico**: `pagamento/+/status/pago`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
