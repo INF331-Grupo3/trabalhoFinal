@@ -721,3 +721,21 @@ Método | Objetivo
 > Escreva um texto detalhando como seus componentes  podem ser preparados para que seja possível trocar de interface apenas trocando o componente View e mantendo o Model e Controller.
 >
 > É recomendado a inserção de, pelo menos, um diagrama que deve ser descrito no texto. O formato do diagrama é livre e deve ilustrar a arquitetura proposta.
+
+Para oferecer suporte às interfaces gráficas solicitadas (Web e Android nativo), optou-se pela separação do sistema em duas partes: 
+
+- Front-end, contendo uma aplicação web desenvolvida em javascript sobre o framework Angular 10 e um aplicativo Android nativo desenvolvido em Kotlin, com Android SDK com API Level 22 ou superior;
+
+- Back-end, onde residiria uma API REST desenvolvida em C Sharp sobre ASP.NET Core 3.,1 para consumo tanto pela aplicação web como pelo aplicativo Android. O banco de dados utilizado seria o MySql e também seria oferecido o phpMyAdmin para facilitar a administração do banco.
+
+Pensando em escalabilidade, seriam utilizados containers Docker tanto para a aplicação Web do front-end como para a API REST do back-end, esta última com containers separados para os componentes ASP.NET Core, MySql e phpMyAdmin.
+
+A hospedagem dos containers poderia ser feita em algum provedor cloud, como AWS ou Azure.
+
+Como nesta arquitetura as views são totalmente independentes do controller e model, seria possível adicionar outras interfaces como iOS ou React com facilidade, sem a necessidade de alterar qualquer componente do back-end, atendendo assim os requisitos do presente trabalho.
+
+> ![Arquitetura](images/arquitetura.jpg)
+> ![Request](images/request.jpg)
+> ![Response](images/response.jpg)
+
+
