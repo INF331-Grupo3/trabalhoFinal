@@ -735,7 +735,9 @@ A hospedagem dos containers poderia ser feita em algum provedor cloud, como AWS 
 Como nesta arquitetura as views são totalmente independentes do controller e model, seria possível adicionar outras interfaces como iOS ou React com facilidade, sem a necessidade de alterar qualquer componente do back-end, atendendo assim os requisitos do presente trabalho.
 
 > ![Arquitetura](images/arquitetura.jpg)
+
 > ![Request](images/request.jpg)
+
 > ![Response](images/response.jpg)
 
 
