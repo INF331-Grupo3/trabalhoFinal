@@ -660,12 +660,18 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ### Detalhamento da interação de componentes
 
-O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 
-* O componente `Entrega Pedido Compra` assina no barramento mensagens de tópico "`pedido/+/entrega`" através da interface `Solicita Entrega`.
-  * Ao receber uma mensagem de tópico "`pedido/+/entrega`", dispara o início da entrega de um conjunto de produtos.
-* Os componentes `Solicita Estoque` e `Solicita Compra` se comunicam com componentes externos pelo barramento:
-  * Para consultar o estoque, o componente `Solicita Estoque` publica no barramento uma mensagem de tópico "`produto/<id>/estoque/consulta`" através da interface `Consulta Estoque` e assina mensagens de tópico "`produto/<id>/estoque/status`" através da interface `Posição Estoque` que retorna a disponibilidade do produto.
+* O componente `ClienteView` é responsável por prover uma interface gráfica para o usuário, o mesmo é composto por mais dois componentes, sendo eles `Selecão de Produtos` e `Pagamento`.
+* O componente `ClienteController` é um controlador composto por mais dois subcomponentes, sendo eles `Processar Produtos` e `Processar Pagamentos`.
+* O componente `ClienteView` tem um ponto de entrada através do subcomponente `Seleção de Produtos` que recebe a interface `Seleciona Produto`.
+* Através desta interface o subcomponente `Seleção de Produtos` envia uma mensagem para o barramento através do tópico `produtos/<produto>/solicitamelhorpreco`.
+* O componente `ClienteController` assina o tópico `produtos/<produto>/solicitamelhorpreco` através da interface `Consultar Melhor Preço` e comunica o subcomponente `Processar Produtos` que envia uma mensagem para o barramento através do tópico "leilao/solicitacao/<produto>".
+* Após receber a resposta do barramento através da interface `Resultado Leilão` o componente `ClienteController` comunica o subcomponente `Processar Produtos` que assina o tópico `produtos/recebemelhorpreco`, através da interface interface `Melhor Preço Fornecedor`.
+* O componente `ClienteView` recebe a mensagem e comunica o subcomponente `Seleção de Produtos`, onde o mesmo se comunica com o subcomponente `Pagamento` que exibirá o melhor preço para o usuário.
+* O subcomponente `Pagamento` possui uma entrada que recebe a interface `Informa a Forma de Pagamento`.
+* Através desta interface o subcomponente `Pagamento` envia uma mensagem para o barramentro através do tópico `pagamento/<formapagamento>/efetuapagamento`.
+* O componente `ClienteController` assina o tópico `pagamento/<formapagamento/efetuapagamento>` através da interface `Efetua Pagamento` e comunica o subcomponente `Processar Pagamentos` que envia uma mensagem para o barramento através do tópico `pagamento/+/solicita"`.
+
 
 Para cada componente será apresentado um documento conforme o modelo a seguir:
 
