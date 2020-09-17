@@ -650,12 +650,6 @@ Atributo | Descrição
 
 # Nível 2
 
-Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
-
-## Diagrama do Nível 2
-
-Apresente um diagrama conforme o modelo a seguir:
-
 > ![Modelo de diagrama no nível 2](https://github.com/INF331-Grupo3/trabalhoFinal/blob/master/images/nivel2_mvc_cliente.png)
 
 ### Detalhamento da interação de componentes
@@ -673,60 +667,190 @@ Apresente um diagrama conforme o modelo a seguir:
 * O componente `ClienteController` assina o tópico `pagamento/<formapagamento/efetuapagamento>` através da interface `Efetua Pagamento` e comunica o subcomponente `Processar Pagamentos` que envia uma mensagem para o barramento através do tópico `pagamento/+/solicita"`.
 
 
-Para cada componente será apresentado um documento conforme o modelo a seguir:
+## Componente Seleção de Produtos
 
-## Componente `<Nome do Componente>`
+> Componente responsável por exibir os produtos ao usuário
 
-> <Resumo do papel do componente e serviços que ele oferece.>
-
-![Componente](images/diagrama-componente.png)
+![Componente](images/nivel2_comp_selProd.png)
 
 **Interfaces**
-> * Listagem das interfaces do componente.
 
 As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
 
-### Interface `<nome da interface>`
+### Interface Consultar Melhor Preço
 
-> ![Diagrama da Interface](images/diagrama-interface-itableproducer.png)
+> ![Diagrama da Interface](images/nivel2_int_2.png)
 
-> <Resumo do papel da interface.>
-
-Método | Objetivo
--------| --------
-`<id do método>` | `<objetivo do método e descrição dos parâmetros>`
-
-## Exemplos:
-
-### Interface `ITableProducer`
-
-![Diagrama da Interface](images/diagrama-interface-itableproducer.png)
-
-Interface provida por qualquer fonte de dados que os forneça na forma de uma tabela.
+Interface utilizada para requisitar o melhor preço de um dado produto através de uma mensagem no barramento.
 
 Método | Objetivo
 -------| --------
-`requestAttributes` | Retorna um vetor com o nome de todos os atributos (colunas) da tabela.
-`requestInstances` | Retorna uma matriz em que cada linha representa uma instância e cada coluna o valor do respectivo atributo (a ordem dos atributos é a mesma daquela fornecida por `requestAttributes`.
+requestMelhorPreco | Método utilizado para publicar no barramento a solicitação do melhor preço para um dado produto, passado como parâmetro de entrada.
 
-### Interface `IDataSetProperties`
+### Interface Preço Produto
 
-![Diagrama da Interface](images/diagrama-interface-idatasetproperties.png)
+> ![Diagrama da Interface](images/nivel2_int_3.png)
 
-Define o recurso (usualmente o caminho para um arquivo em disco) que é a fonte de dados.
+Interface que retorna informações de preço de um produto
 
 Método | Objetivo
 -------| --------
-`getDataSource` | Retorna o caminho da fonte de dados.
-`setDataSource` | Define o caminho da fonte de dados, informado através do parâmetro `dataSource`.
+getPrecoProduto | Método que retorna as informações de preço de um dado produto, passado como parâmetro de entrada.
+
+### Interface Seleciona Produto
+
+> ![Diagrama da Interface](images/nivel2_int_1.png)
+
+Interface utilizada para exibir os produtos a partir de um nome
+
+Método | Objetivo
+-------| --------
+setProduct | Metodo utilizado para visualizar todos os os produtos a partir de um nome de entrada
+
+### Interface Melhor Preço Fornecedor
+
+> ![Diagrama da Interface](images/nivel2_int_4.png)
+
+Interface para receber as melhores ofertas vindas dos fornecedores
+
+Método | Objetivo
+-------| --------
+setMelhorPreco | Método que recebe e registra um ranking dos fornecedores com melhores preços para o produto requisitado
+
+
+## Componente Pagamentos
+
+> Componente utilizado para exibir informações de pagamento ao usuário
+
+![Componente](images/nivel2_comp_pagamentos.png)
+
+**Interfaces**
+
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface Efetuar Pagamentos
+
+> ![Diagrama da Interface](images/nivel2_int_5.png)
+
+Interface utilizada para publicar informaçoes de pagamento no barramento.
+
+Método | Objetivo
+-------| --------
+efetuaPagamento | Método utilizado para efetuar o pagamento de um determinado produto, enviando informações através de mensagem no barramento
+
+### Interface Informa Forma de Pagamento
+
+> ![Diagrama da Interface](images/nivel2_int_7.png)
+
+Interface para registrar as informaçoes de pagamento informadas pelo usuario
+
+Método | Objetivo
+-------| --------
+requestFormaPagamento | Metodo para registrar as informaçoes de pagamento
+
+### Interface Preço Produto
+
+> ![Diagrama da Interface](images/nivel2_int_6.png)
+
+Interface utilizada para solicitar o preço de um produto
+
+Método | Objetivo
+-------| --------
+requestPrecoProduto | Método que requisita o preço de um determinado Produto
+
+
+## Componente Processar Produtos
+
+> Responsável por consolidar as ofertas dos fornecedores para o produto selecionado
+
+![Componente](images/nivel2_comp_procProd.png)
+
+**Interfaces**
+
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface Consultar Melhor Preço
+
+> ![Diagrama da Interface](images/nivel2_int_8.png)
+
+Interface utilizada para solicitar o menor preço de um determinado produto
+
+Método | Objetivo
+-------| --------
+requestMelhorPreco | Método que recebe a requisição de menor de um produto
+
+### Interface Melhor Preço Fornecedor
+
+> ![Diagrama da Interface](images/nivel2_int_9.png)
+
+Interface utilizada para publicar uma lista com melhores preços e fornecedores para um dado produto
+
+Método | Objetivo
+-------| --------
+getMelhorPreco | Método que publica uma lista com melhores preços e fornecedores para um dado produto no barramento
+
+### Interface Consultar Melhor Preço
+
+> ![Diagrama da Interface](images/nivel2_int_2.png)
+
+Interface utilizada para requisitar o melhor preço, através de um leilão, de um dado produto através de uma mensagem no barramento.
+
+Método | Objetivo
+-------| --------
+requestMelhorPreco | Método utilizado para publicar no barramento a solicitação do melhor preço para um dado produto,através de um leilão.
+
+### Interface Resultado Leilão
+
+> ![Diagrama da Interface](images/nivel2_int_10.png)
+
+Interface que recebe os resultados do leilão de um produto.
+
+Método | Objetivo
+-------| --------
+setResultado | Método que recebe uma lista com os resultado dos fornecedores e seus respectivos preços, para um dado produto.
+
+## Componente Processar Pagamentos
+
+> Responsável por gerenciar o pagamento do usuário, de um determinado produto 
+
+![Componente](images/nivel2_comp_procPag.png)
+
+**Interfaces**
+
+As interfaces listadas são detalhadas a seguir:
+
+## Detalhamento das Interfaces
+
+### Interface Efetuar Pagamento
+
+> ![Diagrama da Interface](images/nivel2_int_11.png)
+
+Interface utilizada para requisitar informacoes de um pagamento.
+
+Método | Objetivo
+-------| --------
+setDadosPagamento | Método que recebe e registra informações de pagamento.
+
+
+### Interface Efetuar Pagamento
+
+> ![Diagrama da Interface](images/nivel2_int_4.png)
+
+Interface utilizada para publicar informaçoes de pagamento no barramento.
+
+Método | Objetivo
+-------| --------
+efetuaPagamento | Método utilizado para efetuar o pagamento de um determinado produto, enviando informações através de mensagem no barramento
+
 
 # Multiplas Interfaces
 
-> Escreva um texto detalhando como seus componentes  podem ser preparados para que seja possível trocar de interface apenas trocando o componente View e mantendo o Model e Controller.
->
-> É recomendado a inserção de, pelo menos, um diagrama que deve ser descrito no texto. O formato do diagrama é livre e deve ilustrar a arquitetura proposta.
 
 Para oferecer suporte às interfaces gráficas solicitadas (Web e Android nativo), optou-se pela separação do sistema em duas partes: 
 
